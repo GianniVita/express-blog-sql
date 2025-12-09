@@ -3,6 +3,7 @@ const app = express()
 const PORT = 3000
 const postRouter = require('./routers/posts')
 const posts = require('./data/articles')
+const connection = require('./database/db')
 
 // register the static assets
 app.use(express.static('public'))

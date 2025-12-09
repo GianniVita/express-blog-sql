@@ -1,4 +1,5 @@
 const articles = require("../data/articles");
+const connection = require('../database/db');
 
 const index = (req, res) => {
     const { tag } = req.query;
