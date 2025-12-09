@@ -1,18 +1,24 @@
 const articles = require("../data/articles");
 const connection = require('../database/db');
 
-const index = (req, res) => {
-    const { tag } = req.query;
 
-    if (tag) {
-        const filteredArticles = articles.filter(article => article.tags.includes(tag));
-        return res.status(200).json(filteredArticles);
-    }
 
-    // In caso tag non sia definito facciamo restituire tutti gli articoli
-    return res.status(200).json(articles);
-
+function index(req, res) {
+    // prepariamo la query
+    const sql = 'SELECT * FROM articles';
+    // eseguiamo la query!
+    connection.query(sql, (err, results) => {
+        if (err) return res.status(500).json({ error: 'Database query failed' });
+        res.json(results);
+    });
 };
+
+
+
+
+
+
+
 
 
 const show = (req, res) => {
