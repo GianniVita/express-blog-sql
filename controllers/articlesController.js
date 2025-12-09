@@ -5,7 +5,7 @@ const connection = require('../database/db');
 
 function index(req, res) {
     // prepariamo la query
-    const sql = 'SELECT * FROM articles';
+    const sql = 'SELECT * FROM posts';
     // eseguiamo la query!
     connection.query(sql, (err, results) => {
         if (err) return res.status(500).json({ error: 'Database query failed' });
@@ -88,8 +88,8 @@ const modify = (req, res) => {
 
 function destroy(req, res){
     const { id } = req.params;
-    connection.query('DELETE FROM articles WHERE id = ?', [id], (err, results) => {
-        if (err) return res.status(500).json ({ error:'Failed to delete Article'});
+    connection.query('DELETE FROM posts WHERE id = ?', [id], (err, results) => {
+        if (err) return res.status(500).json ({ error:'Failed to delete a Post'});
         res.sendStatus(204)
 
     })
