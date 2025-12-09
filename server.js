@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 // define your first route
-app.get("/", (req,res) => {
+app.get("/", (req, res) => {
     res.send("Benvenuto nel mio API!");
 });
 
