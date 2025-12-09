@@ -14,27 +14,21 @@ function index(req, res) {
 };
 
 
-
-
-
-
-
-
-
-const show = (req, res) => {
+function show(req, res) {
     const id = Number(req.params.id);
-    const foundArticle = articles.find(article => article.id === id);
-    //console.log(foundArticle);
+    // eseguiamo la query
+    connection.query('SELECT * FROM posts WHERE id = ?', [id], (err, results) => {
+        if (err) return req.status(500).json({ error: 'Dtatbase query failed'});
     
-
-    if (!foundArticle) {
-        return res.status(404).json({ 
-          error: true ,
-          message: 'Articolo non trovato'
-        });
+    // verifichiamo se è atato trovato un articolo
+    if (results.length === 0) {
+        return res.status(404).json({error:'Articolo non trovato'});
     }
-    res.json(foundArticle);
-};
+    res.json(result[0]);
+        
+    });
+
+}
 
 
 const store = (req, res) => {
